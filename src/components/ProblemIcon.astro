@@ -1,0 +1,12 @@
+---
+interface Props { type: 'costs' | 'heat' | 'process' | 'resources' | 'control'; }
+const { type } = Astro.props;
+---
+
+<svg class="problem-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+	{type === 'costs' && <><path d="M24 8v32M31 15c-1.6-2-4-3-7-3-4.4 0-7 2.2-7 5s2.6 5 7 6 7 2 7 5-2.6 5-7 5c-3 0-5.5-1-7-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/></>}
+	{type === 'heat' && <><path d="M15 34c-3-3-3-8 0-11 3-3 3-7 0-10M24 39c-4-4-4-10 0-14 4-4 4-9 0-14M33 34c-3-3-3-8 0-11 3-3 3-7 0-10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 40h30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></>}
+	{type === 'process' && <><path d="M9 34h7V21h8V11h8v23h7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m34 29 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></>}
+	{type === 'resources' && <><path d="M24 39V19M24 27l-8-8M24 27l8-8M14 39h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 9c5 4 7 7 7 11a7 7 0 0 1-14 0c0-4 2-7 7-11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></>}
+	{type === 'control' && <><circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="currentColor"/><path d="M24 9V5M24 43v-4M9 24H5m38 0h-4M13.4 13.4l-2.8-2.8m26.8 26.8-2.8-2.8M34.6 13.4l2.8-2.8M10.6 37.4l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></>}
+</svg>
