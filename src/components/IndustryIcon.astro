@@ -1,0 +1,10 @@
+---
+interface Props { type: 'food' | 'production' | 'warehouse'; }
+const { type } = Astro.props;
+---
+
+<svg class="industry-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+	{type === 'food' && <><path d="M12 25h24v14H12z" stroke="currentColor" stroke-width="2"/><path d="M16 25v-7a8 8 0 0 1 16 0v7M20 12V8m8 4V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 31h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></>}
+	{type === 'production' && <><path d="M8 38h32M11 38V22l9 5v-9l9 5V12l9 5v21" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 33h3m7 0h3m7 0h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></>}
+	{type === 'warehouse' && <><path d="m7 20 17-9 17 9v19H7V20Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M18 39V25h12v14M12 20h24M13 30h3m16 0h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></>}
+</svg>

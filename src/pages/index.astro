@@ -1,17 +1,54 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndustryIcon from '../components/IndustryIcon.astro';
+import CaseStudyIcon from '../components/CaseStudyIcon.astro';
+import { caseStudies, industries } from '../data/site';
 
+const description = 'Enflow Solutions pomaga małym i średnim firmom produkcyjnym ograniczać straty energii i wdrażać opłacalne rozwiązania energetyczne.';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Krystian Alechno hehe</title>
-	</head>
-	<body>
-		<h1>Krystian Alechno hehe</h1>
-	</body>
-</html>
+<BaseLayout title="Enflow Solutions — energia dla przemysłu" description={description}>
+	<section class="hero">
+		<div class="hero-glow hero-glow-left"></div><div class="hero-glow hero-glow-right"></div>
+		<div class="container hero-grid">
+			<div class="hero-copy">
+				<p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Creating Wise Energy Systems</p>
+				<h1>Mniej strat.<br /><em>Więcej kontroli</em> nad energią.</h1>
+				<p class="hero-lead">Projektujemy i wdrażamy rozwiązania, które pomagają firmom produkcyjnym lepiej wykorzystać energię, obniżyć koszty i spokojniej planować rozwój.</p>
+				<div class="hero-actions"><a class="button button-primary" href="/kontakt/">Porozmawiajmy o Twoim zakładzie <span aria-hidden="true">↗</span></a><a class="text-link text-link-light" href="#realizacje">Zobacz przykładowe realizacje <span aria-hidden="true">↓</span></a></div>
+				<div class="hero-trust"><span>Dolny Śląsk</span><span class="trust-divider"></span><span>Produkcja</span><span class="trust-divider"></span><span>Spożywcza</span></div>
+			</div>
+			<div class="hero-visual" aria-label="Wizualizacja przepływu energii">
+				<div class="hero-visual-label">SYSTEM / 01</div>
+				<div class="energy-ring ring-large"></div><div class="energy-ring ring-small"></div>
+				<div class="energy-line line-a"></div><div class="energy-line line-b"></div><div class="energy-line line-c"></div>
+				<div class="energy-node node-main"><span>AB</span></div><div class="energy-node node-top"><span>+</span></div><div class="energy-node node-side"><span>↗</span></div>
+				<div class="hero-stat stat-top"><strong>600</strong><span>kW odzyskanej<br />mocy</span></div>
+				<div class="hero-stat stat-bottom"><strong>−32%</strong><span>kosztów<br />energii</span></div>
+			</div>
+		</div>
+		<div class="hero-bottom-line"><div class="container"><span>01</span><span class="line"></span><span>Rozwiązania dopasowane do procesu</span></div></div>
+	</section>
+
+	<section class="proof-strip"><div class="container proof-grid"><div><strong>Nie zaczynamy od produktu.</strong><span>Zaczynamy od tego, gdzie ucieka energia.</span></div><div class="proof-item"><strong>01</strong><span>Analiza procesu</span></div><div class="proof-item"><strong>02</strong><span>Dobór rozwiązania</span></div><div class="proof-item"><strong>03</strong><span>Realny zwrot</span></div></div></section>
+
+	<section class="section section-light" id="branze">
+		<div class="container">
+			<div class="section-heading split-heading"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Dla kogo pracujemy</p><h2>Rozwiązania dla różnych <em>branż przemysłu</em></h2></div><p class="section-intro">Każdy zakład ma inny proces, rytm pracy i miejsca, w których powstają straty. Dlatego zaczynamy od zrozumienia konkretnej sytuacji.</p></div>
+			<div class="industry-grid">
+				{industries.map((industry, index) => <a class="industry-card" href={`/branze/${industry.slug}/`}><div class="card-topline"><span>0{index + 1}</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="industry-card-icon"><IndustryIcon type={industry.icon} /></div><h3>{industry.shortTitle}</h3><p>{industry.description}</p><span class="card-link">Zobacz rozwiązania <span aria-hidden="true">→</span></span></a>)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-navy" id="realizacje">
+		<div class="container">
+			<div class="section-heading split-heading split-heading-light"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Przykładowe realizacje</p><h2>Technologia, która <em>pracuje na wynik</em></h2></div><p class="section-intro">Pokazujemy językiem liczb, co może zmienić dobrze zaprojektowany system energetyczny.</p></div>
+			<div class="case-grid">{caseStudies.map((item) => <article class="case-card"><CaseStudyIcon type={item.type as 'food' | 'production' | 'warehouse'} /><div class="case-content"><p class="case-kicker">{item.type === 'food' ? 'Spożywcza' : item.type === 'warehouse' ? 'Hale i magazyny' : 'Produkcja'}</p><h3>{item.title}</h3><p>{item.subtitle}</p><div class="case-metrics"><div><span>Moc grzewcza</span><strong>{item.power}</strong></div><div><span>Czas zwrotu</span><strong>{item.payback}</strong></div></div></div></article>)}</div>
+		</div>
+	</section>
+
+	<section class="section section-light process-section"><div class="container process-grid"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Jak działamy</p><h2>Od problemu do <em>konkretnego wyniku</em></h2><a class="button button-dark" href="/kontakt/">Umów pierwszą rozmowę <span aria-hidden="true">↗</span></a></div><div class="process-list"><div class="process-step"><span>01</span><div><h3>Rozpoznajemy proces</h3><p>Rozmawiamy z osobami, które znają zakład od środka. Pytamy o koszty, ograniczenia i plany.</p></div></div><div class="process-step"><span>02</span><div><h3>Liczymy możliwości</h3><p>Wskazujemy miejsca, w których odzysk, modernizacja lub sterowanie przyniesie realną wartość.</p></div></div><div class="process-step"><span>03</span><div><h3>Budujemy plan działania</h3><p>Otrzymujesz jasne rozwiązanie, założenia inwestycji i drogę do wdrożenia.</p></div></div></div></div></section>
+
+	<section class="cta-section"><div class="container cta-box"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Porozmawiajmy</p><h2>Masz zakład, w którym <em>energia może pracować lepiej?</em></h2></div><a class="button button-primary" href="/kontakt/">Opowiedz nam o nim <span aria-hidden="true">↗</span></a></div></section>
+</BaseLayout>

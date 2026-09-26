@@ -1,0 +1,71 @@
+---
+import { navItems } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	currentPath?: string;
+}
+
+const { title, description, currentPath = Astro.url.pathname } = Astro.props;
+const siteUrl = Astro.site ?? new URL('https://example.com');
+---
+
+<!doctype html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#002430" />
+		<link rel="canonical" href={new URL(currentPath, siteUrl)} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<a class="skip-link" href="#main-content">Przejdź do treści</a>
+		<header class="site-header">
+			<div class="container nav-shell">
+				<a class="brand" href="/" aria-label="Enflow Solutions — strona główna">
+					<span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+					<span class="brand-wordmark"><strong>Enflow</strong><small>Solutions</small></span>
+				</a>
+				<nav aria-label="Główna nawigacja">
+					<ul class="nav-links">
+						{navItems.map((item) => (
+							<li><a class={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'active' : ''} href={item.href}>{item.label}</a></li>
+						))}
+					</ul>
+				</nav>
+				<a class="button button-small button-outline-light nav-cta" href="/kontakt/">Porozmawiajmy <span aria-hidden="true">↗</span></a>
+			</div>
+		</header>
+		<main id="main-content"><slot /></main>
+		<footer class="site-footer">
+			<div class="container footer-grid">
+				<div>
+					<a class="brand brand-footer" href="/" aria-label="Enflow Solutions — strona główna">
+						<span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+						<span class="brand-wordmark"><strong>Enflow</strong><small>Solutions</small></span>
+					</a>
+					<p class="footer-note">Creating Wise Energy Systems.<br />Energia dla przemysłu.</p>
+				</div>
+				<div>
+					<p class="footer-label">Nawigacja</p>
+					<ul class="footer-links">
+						{navItems.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+					</ul>
+				</div>
+				<div>
+					<p class="footer-label">Obszar działania</p>
+					<p class="footer-note">Dolny Śląsk<br />i województwa ościenne</p>
+				</div>
+			</div>
+			<div class="container footer-bottom"><span>© {new Date().getFullYear()} Enflow Solutions</span><span>Creating Wise Energy Systems</span></div>
+		</footer>
+	</body>
+</html>

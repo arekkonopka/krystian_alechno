@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import IndustryIcon from '../../components/IndustryIcon.astro';
+import { industries } from '../../data/site';
+
+export function getStaticPaths() {
+	return industries.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
+}
+
+const { industry } = Astro.props;
+---
+
+<BaseLayout title={`${industry.shortTitle} — Enflow Solutions`} description={industry.description}>
+	<section class="page-hero industry-detail-hero"><div class="container page-hero-grid"><div><a class="back-link" href="/branze/">← Wszystkie branże</a><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> {industry.shortTitle}</p><h1>{industry.title}</h1><p>{industry.intro}</p></div><div class="detail-icon-wrap" style={`--industry-accent: ${industry.accent}`}><IndustryIcon type={industry.icon} /></div></div></section>
+	<section class="section section-light"><div class="container detail-grid"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Wyzwania</p><h2>Co zwykle <em>nie daje spokoju</em></h2><div class="bullet-list">{industry.challenges.map((challenge) => <div><span>↗</span><p>{challenge}</p></div>)}</div></div><div class="solution-panel"><p class="eyebrow"><span class="eyebrow-dot"></span> Możliwe kierunki</p><h2>Gdzie szukamy <em>rozwiązania</em></h2><div class="solution-list">{industry.solutions.map((solution, index) => <div><span>0{index + 1}</span><p>{solution}</p></div>)}</div><a class="button button-dark" href="/kontakt/">Porozmawiajmy o Twoim zakładzie <span aria-hidden="true">↗</span></a></div></div></section>
+	<section class="cta-section"><div class="container cta-box"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Następny krok</p><h2>Najlepszy projekt zaczyna się od <em>dobrych pytań.</em></h2></div><a class="button button-primary" href="/kontakt/">Opowiedz nam o procesie <span aria-hidden="true">↗</span></a></div></section>
+</BaseLayout>

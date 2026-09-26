@@ -1,0 +1,10 @@
+---
+interface Props { type: 'food' | 'production' | 'warehouse'; }
+const { type } = Astro.props;
+---
+
+<div class={`case-visual case-visual-${type}`} aria-hidden="true">
+	<div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+	<div class="visual-core"><span></span><span></span><span></span></div>
+	<div class="visual-spark spark-one"></div><div class="visual-spark spark-two"></div>
+</div>
