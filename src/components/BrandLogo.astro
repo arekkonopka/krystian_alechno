@@ -1,0 +1,17 @@
+---
+import { withBase } from '../utils/paths';
+
+interface Props {
+	variant?: 'light' | 'dark';
+	size?: 'sm' | 'md' | 'lg';
+}
+
+const { variant = 'light', size = 'md' } = Astro.props;
+---
+
+<span class={`brand-logo brand-logo-${variant} brand-logo-${size}`}>
+	<img src={withBase('/enflow-mark.png')} width="1341" height="1173" alt="" aria-hidden="true" />
+	<span class="brand-logo-copy">
+		<span class="brand-logo-name"><strong>Enflow</strong><span>Solutions</span></span>
+	</span>
+</span>
