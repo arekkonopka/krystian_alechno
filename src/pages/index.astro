@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import IndustryIcon from '../components/IndustryIcon.astro';
 import CaseStudyIcon from '../components/CaseStudyIcon.astro';
 import { caseStudies, industries } from '../data/site';
+import { withBase } from '../utils/paths';
 
 const description = 'Enflow Solutions pomaga małym i średnim firmom produkcyjnym ograniczać straty energii i wdrażać opłacalne rozwiązania energetyczne.';
 ---
@@ -15,7 +16,7 @@ const description = 'Enflow Solutions pomaga małym i średnim firmom produkcyjn
 				<p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Creating Wise Energy Systems</p>
 				<h1>Mniej strat.<br /><em>Więcej kontroli</em> nad energią.</h1>
 				<p class="hero-lead">Projektujemy i wdrażamy rozwiązania, które pomagają firmom produkcyjnym lepiej wykorzystać energię, obniżyć koszty i spokojniej planować rozwój.</p>
-				<div class="hero-actions"><a class="button button-primary" href="/kontakt/">Porozmawiajmy o Twoim zakładzie <span aria-hidden="true">↗</span></a><a class="text-link text-link-light" href="#realizacje">Zobacz przykładowe realizacje <span aria-hidden="true">↓</span></a></div>
+				<div class="hero-actions"><a class="button button-primary" href={withBase("/kontakt/")}>Porozmawiajmy o Twoim zakładzie <span aria-hidden="true">↗</span></a><a class="text-link text-link-light" href="#realizacje">Zobacz przykładowe realizacje <span aria-hidden="true">↓</span></a></div>
 				<div class="hero-trust"><span>Dolny Śląsk</span><span class="trust-divider"></span><span>Produkcja</span><span class="trust-divider"></span><span>Spożywcza</span></div>
 			</div>
 			<div class="hero-visual" aria-label="Wizualizacja przepływu energii">
@@ -36,7 +37,7 @@ const description = 'Enflow Solutions pomaga małym i średnim firmom produkcyjn
 		<div class="container">
 			<div class="section-heading split-heading"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Dla kogo pracujemy</p><h2>Rozwiązania dla różnych <em>branż przemysłu</em></h2></div><p class="section-intro">Każdy zakład ma inny proces, rytm pracy i miejsca, w których powstają straty. Dlatego zaczynamy od zrozumienia konkretnej sytuacji.</p></div>
 			<div class="industry-grid">
-				{industries.map((industry, index) => <a class="industry-card" href={`/branze/${industry.slug}/`}><div class="card-topline"><span>0{index + 1}</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="industry-card-icon"><IndustryIcon type={industry.icon} /></div><h3>{industry.shortTitle}</h3><p>{industry.description}</p><span class="card-link">Zobacz rozwiązania <span aria-hidden="true">→</span></span></a>)}
+				{industries.map((industry, index) => <a class="industry-card" href={withBase("/branze/" + industry.slug + "/")}><div class="card-topline"><span>0{index + 1}</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="industry-card-icon"><IndustryIcon type={industry.icon} /></div><h3>{industry.shortTitle}</h3><p>{industry.description}</p><span class="card-link">Zobacz rozwiązania <span aria-hidden="true">→</span></span></a>)}
 			</div>
 		</div>
 	</section>
@@ -48,7 +49,7 @@ const description = 'Enflow Solutions pomaga małym i średnim firmom produkcyjn
 		</div>
 	</section>
 
-	<section class="section section-light process-section"><div class="container process-grid"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Jak działamy</p><h2>Od problemu do <em>konkretnego wyniku</em></h2><a class="button button-dark" href="/kontakt/">Umów pierwszą rozmowę <span aria-hidden="true">↗</span></a></div><div class="process-list"><div class="process-step"><span>01</span><div><h3>Rozpoznajemy proces</h3><p>Rozmawiamy z osobami, które znają zakład od środka. Pytamy o koszty, ograniczenia i plany.</p></div></div><div class="process-step"><span>02</span><div><h3>Liczymy możliwości</h3><p>Wskazujemy miejsca, w których odzysk, modernizacja lub sterowanie przyniesie realną wartość.</p></div></div><div class="process-step"><span>03</span><div><h3>Budujemy plan działania</h3><p>Otrzymujesz jasne rozwiązanie, założenia inwestycji i drogę do wdrożenia.</p></div></div></div></div></section>
+	<section class="section section-light process-section"><div class="container process-grid"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Jak działamy</p><h2>Od problemu do <em>konkretnego wyniku</em></h2><a class="button button-dark" href={withBase("/kontakt/")}>Umów pierwszą rozmowę <span aria-hidden="true">↗</span></a></div><div class="process-list"><div class="process-step"><span>01</span><div><h3>Rozpoznajemy proces</h3><p>Rozmawiamy z osobami, które znają zakład od środka. Pytamy o koszty, ograniczenia i plany.</p></div></div><div class="process-step"><span>02</span><div><h3>Liczymy możliwości</h3><p>Wskazujemy miejsca, w których odzysk, modernizacja lub sterowanie przyniesie realną wartość.</p></div></div><div class="process-step"><span>03</span><div><h3>Budujemy plan działania</h3><p>Otrzymujesz jasne rozwiązanie, założenia inwestycji i drogę do wdrożenia.</p></div></div></div></div></section>
 
-	<section class="cta-section"><div class="container cta-box"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Porozmawiajmy</p><h2>Masz zakład, w którym <em>energia może pracować lepiej?</em></h2></div><a class="button button-primary" href="/kontakt/">Opowiedz nam o nim <span aria-hidden="true">↗</span></a></div></section>
+	<section class="cta-section"><div class="container cta-box"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Porozmawiajmy</p><h2>Masz zakład, w którym <em>energia może pracować lepiej?</em></h2></div><a class="button button-primary" href={withBase("/kontakt/")}>Opowiedz nam o nim <span aria-hidden="true">↗</span></a></div></section>
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import { navItems } from '../data/site';
+import { withBase } from '../utils/paths';
 import '../styles/global.css';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 const { title, description, currentPath = Astro.url.pathname } = Astro.props;
 const siteUrl = Astro.site ?? new URL('https://example.com');
+const canonicalUrl = new URL(withBase(currentPath), new URL(siteUrl).origin);
 ---
 
 <!doctype html>
@@ -19,8 +21,8 @@ const siteUrl = Astro.site ?? new URL('https://example.com');
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#002430" />
-		<link rel="canonical" href={new URL(currentPath, siteUrl)} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
@@ -30,25 +32,25 @@ const siteUrl = Astro.site ?? new URL('https://example.com');
 		<a class="skip-link" href="#main-content">Przejdź do treści</a>
 		<header class="site-header">
 			<div class="container nav-shell">
-				<a class="brand" href="/" aria-label="Enflow Solutions — strona główna">
+				<a class="brand" href={withBase('/')} aria-label="Enflow Solutions — strona główna">
 					<span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
 					<span class="brand-wordmark"><strong>Enflow</strong><small>Solutions</small></span>
 				</a>
 				<nav aria-label="Główna nawigacja">
 					<ul class="nav-links">
 						{navItems.map((item) => (
-							<li><a class={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'active' : ''} href={item.href}>{item.label}</a></li>
+							<li><a class={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'active' : ''} href={withBase(item.href)}>{item.label}</a></li>
 						))}
 					</ul>
 				</nav>
-				<a class="button button-small button-outline-light nav-cta" href="/kontakt/">Porozmawiajmy <span aria-hidden="true">↗</span></a>
+				<a class="button button-small button-outline-light nav-cta" href={withBase('/kontakt/')}>Porozmawiajmy <span aria-hidden="true">↗</span></a>
 			</div>
 		</header>
 		<main id="main-content"><slot /></main>
 		<footer class="site-footer">
 			<div class="container footer-grid">
 				<div>
-					<a class="brand brand-footer" href="/" aria-label="Enflow Solutions — strona główna">
+					<a class="brand brand-footer" href={withBase('/')} aria-label="Enflow Solutions — strona główna">
 						<span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
 						<span class="brand-wordmark"><strong>Enflow</strong><small>Solutions</small></span>
 					</a>
@@ -57,7 +59,7 @@ const siteUrl = Astro.site ?? new URL('https://example.com');
 				<div>
 					<p class="footer-label">Nawigacja</p>
 					<ul class="footer-links">
-						{navItems.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+						{navItems.map((item) => <li><a href={withBase(item.href)}>{item.label}</a></li>)}
 					</ul>
 				</div>
 				<div>
