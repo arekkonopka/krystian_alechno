@@ -8,7 +8,6 @@ import { withBase } from '../utils/paths';
 
 const description = 'Enflow Solutions pomaga małym i średnim firmom produkcyjnym ograniczać straty energii i wdrażać opłacalne rozwiązania energetyczne.';
 const problems = [
-	{ type: 'costs', title: 'Wysokie koszty energii', description: 'Rosnące ceny energii i mediów bezpośrednio wpływają na koszty prowadzenia produkcji.' },
 	{ type: 'heat', title: 'Tracone ciepło', description: 'Ciepło z procesów technologicznych często ucieka, mimo że może zostać wykorzystane ponownie.' },
 	{ type: 'process', title: 'Energochłonne procesy', description: 'Produkcja, chłodzenie, ogrzewanie i sprężone powietrze mogą wymagać więcej energii, niż to konieczne.' },
 	{ type: 'resources', title: 'Niewykorzystane zasoby energii', description: 'Ciepło odpadowe, OZE i potencjał magazynowania nie zawsze są odpowiednio wykorzystywane.' },
@@ -22,8 +21,8 @@ const problems = [
 		<div class="container hero-grid">
 			<div class="hero-copy">
 				<p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Inteligentne rozwiązania energetyczne dla przemysłu</p>
-				<h1>Wykorzystaj energię,<br /><em>za którą już zapłaciłeś.</em></h1>
-				<p class="hero-lead">Znajdujemy straty, niewykorzystany potencjał i możliwości odzysku energii w przedsiębiorstwach produkcyjnych. Następnie przekładamy je na konkretne rozwiązania, policzony efekt i niższe koszty działalności.</p>
+				<h1>Wykorzystaj energię,<br /><em>która jest w firmie.</em></h1>
+				<p class="hero-lead">Instalacje grzewcze i chłodnicze w zakładach przemysłowych mają ogromny potencjał do oszczędności pieniędzy. Pomagamy firmom produkcyjnym znaleźć, gdzie ponoszą niepotrzebne koszty na energię, a następnie znajdujemy i wdrażamy konkretne rozwiązania, które obniżają koszty prowadzenia działalności.</p>
 				<div class="hero-actions"><a class="button button-primary" href={withBase("/kontakt/")}>Porozmawiajmy o Twojej firmie <span aria-hidden="true">→</span></a><a class="text-link text-link-light" href="#jak-pracujemy">Zobacz, jak pracujemy <span aria-hidden="true">→</span></a></div>
 				<div class="hero-trust"><span>Dolny Śląsk</span><span class="trust-divider"></span><span>Produkcja</span><span class="trust-divider"></span><span>Spożywcza</span></div>
 			</div>
@@ -62,7 +61,44 @@ const problems = [
 		</div>
 	</section>
 
-	<section id="jak-pracujemy" class="section section-light process-section"><div class="container process-grid"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Jak działamy</p><h2>Od problemu do <em>konkretnego wyniku</em></h2><a class="button button-dark" href={withBase("/kontakt/")}>Umów pierwszą rozmowę <span aria-hidden="true">↗</span></a></div><div class="process-list"><div class="process-step"><span>01</span><div><h3>Rozpoznajemy proces</h3><p>Rozmawiamy z osobami, które znają zakład od środka. Pytamy o koszty, ograniczenia i plany.</p></div></div><div class="process-step"><span>02</span><div><h3>Liczymy możliwości</h3><p>Wskazujemy miejsca, w których odzysk, modernizacja lub sterowanie przyniesie realną wartość.</p></div></div><div class="process-step"><span>03</span><div><h3>Budujemy plan działania</h3><p>Otrzymujesz jasne rozwiązanie, założenia inwestycji i drogę do wdrożenia.</p></div></div></div></div></section>
+	<section id="jak-pracujemy" class="section section-light process-section">
+		<div class="container">
+			<div class="process-heading">
+				<p class="eyebrow"><span class="eyebrow-dot"></span> Nasze podejście</p>
+				<h2>Od analizy do <em>działającego rozwiązania</em></h2>
+				<p>Łączymy analizę energetyczną, inżynierię i wykonawstwo, aby przeprowadzić projekt od identyfikacji potencjału aż do uruchomienia gotowej instalacji.</p>
+			</div>
+
+			<div class="process-track" aria-label="Etapy współpracy z Enflow Solutions">
+				<div class="process-route" aria-hidden="true"></div>
+				<div class="process-step process-step-left" data-process-step style="--process-delay: 0ms"><span class="process-number">01</span><div><h3>Analiza sytuacji energetycznej</h3><p>Poznajemy procesy i zużycie energii w Twojej firmie.</p></div></div>
+				<div class="process-step process-step-right" data-process-step style="--process-delay: 80ms"><span class="process-number">02</span><div><h3>Identyfikacja możliwości oszczędności</h3><p>Wskazujemy działania z największym potencjałem redukcji kosztów.</p></div></div>
+				<div class="process-step process-step-left" data-process-step style="--process-delay: 160ms"><span class="process-number">03</span><div><h3>Audyt energetyczny</h3><p>Szczegółowo analizujemy wybrane obszary i potwierdzamy potencjał techniczny i ekonomiczny.</p></div></div>
+				<div class="process-step process-step-right" data-process-step style="--process-delay: 240ms"><span class="process-number">04</span><div><h3>Projekt koncepcyjny</h3><p>Opracowujemy rozwiązanie i dobieramy technologię.</p></div></div>
+				<div class="process-step process-step-left" data-process-step style="--process-delay: 320ms"><span class="process-number">05</span><div><h3>Projekt wykonawczy</h3><p>Przygotowujemy szczegółową dokumentację do realizacji.</p></div></div>
+				<div class="process-step process-step-right" data-process-step style="--process-delay: 400ms"><span class="process-number">06</span><div><h3>Wykonanie instalacji</h3><p>Realizujemy projekt – od dostawy urządzeń i montażu po uruchomienie.</p></div></div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		const processSteps = document.querySelectorAll('[data-process-step]');
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		if (processSteps.length && !prefersReducedMotion && 'IntersectionObserver' in window) {
+			document.documentElement.classList.add('has-process-motion');
+			const processObserver = new IntersectionObserver((entries, observer) => {
+				entries.forEach((entry) => {
+					if (!entry.isIntersecting) return;
+					const step = entry.target;
+					window.setTimeout(() => step.classList.add('is-visible'), Number.parseInt(step.style.getPropertyValue('--process-delay')) || 0);
+					observer.unobserve(entry.target);
+				});
+			}, { rootMargin: '0px 0px -8% 0px', threshold: 0.2 });
+
+			processSteps.forEach((step) => processObserver.observe(step));
+		}
+	</script>
 
 	<section class="cta-section"><div class="container cta-box"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Porozmawiajmy</p><h2>Masz zakład, w którym <em>energia może pracować lepiej?</em></h2></div><a class="button button-primary" href={withBase("/kontakt/")}>Opowiedz nam o nim <span aria-hidden="true">↗</span></a></div></section>
 </BaseLayout>
