@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import IndustryIcon from '../../components/IndustryIcon.astro';
+import ProductionSourceIcon from '../../components/ProductionSourceIcon.astro';
 import { industries } from '../../data/site';
 import { withBase } from '../../utils/paths';
 
@@ -9,10 +10,73 @@ export function getStaticPaths() {
 }
 
 const { industry } = Astro.props;
+const isProduction = industry.slug === 'produkcyjna';
+const isFood = industry.slug === 'spozywcza';
+const isOther = industry.slug === 'inne-branze-przemyslowe';
+const heroImage = isFood ? '/food-hero.png' : isOther ? '/other-industries-hero.png' : '/production-hero.png';
+const heroImageAlt = isFood ? 'Zakład produkcji spożywczej z instalacjami technologicznymi' : isOther ? 'Nowoczesne centrum danych z szafami serwerowymi i instalacjami chłodniczymi' : 'Zakład produkcyjny z instalacjami technologicznymi';
+const productionSources = [
+	{ number: '01', type: 'air', title: 'Sprężarki powietrza', description: 'Ciepło z chłodzenia sprężarki, oleju i sprężonego powietrza.' },
+	{ number: '02', type: 'furnace', title: 'Piece i procesy wysokotemperaturowe', description: 'Spaliny i gorące powietrze z procesów technologicznych.' },
+	{ number: '03', type: 'ventilation', title: 'Odciągi i wentylacja technologiczna', description: 'Gorące powietrze usuwane z hali lub znad procesu.' },
+	{ number: '04', type: 'cooling', title: 'Układy chłodzenia maszyn i procesów', description: 'Woda chłodząca, olej, chillery i inne systemy chłodzenia.' },
+	{ number: '05', type: 'energy', title: 'Silniki, agregaty i urządzenia energetyczne', description: 'Duże silniki, agregaty prądotwórcze i kogeneracja.' },
+] as const;
+const foodSources = [
+	{ number: '01', type: 'snow', title: 'Agregaty i instalacje chłodnicze', description: 'Chłodnie, mroźnie, chillery i chłodzenie produktu.' },
+	{ number: '02', type: 'water', title: 'Ciepła woda i ścieki technologiczne', description: 'Mycie, płukanie, CIP i procesy technologiczne.' },
+	{ number: '03', type: 'steam', title: 'Para technologiczna i kondensat', description: 'Gotowanie, parzenie, sterylizacja i pasteryzacja.' },
+	{ number: '04', type: 'heat', title: 'Piece, suszarnie i gorące powietrze technologiczne', description: 'Piekarnie, przetwórstwo, suszenie i produkcja dań gotowych.' },
+	{ number: '05', type: 'air', title: 'Sprężarki i inne urządzenia pomocnicze', description: 'Sprężarki powietrza i chłodzenie maszyn i urządzeń.' },
+] as const;
+const otherSources = [
+	{ number: '01', type: 'server', title: 'Centra danych', description: 'Serwery i urządzenia IT generują duże ilości ciepła odprowadzanego przez system chłodzenia.' },
+	{ number: '02', type: 'ice', title: 'Lodowiska', description: 'Instalacje chłodnicze tafli lodowej generują znaczne ilości użytecznego ciepła.' },
+	{ number: '03', type: 'water-cycle', title: 'Oczyszczalnie ścieków', description: 'Ścieki zawierają energię cieplną, która po oczyszczeniu zwykle jest tracona.' },
+	{ number: '04', type: 'pool', title: 'Baseny i aquaparki', description: 'Energia jest tracona wraz z ciepłym powietrzem, wodą i pracą instalacji chłodniczych.' },
+	{ number: '05', type: 'carwash', title: 'Myjnie samochodowe', description: 'Ciepła woda po procesie mycia odprowadza energię bezpośrednio do kanalizacji.' },
+] as const;
 ---
 
 <BaseLayout title={`${industry.shortTitle} — Enflow Solutions`} description={industry.description}>
-	<section class="page-hero industry-detail-hero"><div class="container page-hero-grid"><div><a class="back-link" href={withBase("/branze/")}>← Wszystkie branże</a><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> {industry.shortTitle}</p><h1>{industry.title}</h1><p>{industry.intro}</p></div><div class="detail-icon-wrap" style={`--industry-accent: ${industry.accent}`}><IndustryIcon type={industry.icon} /></div></div></section>
-	<section class="section section-light"><div class="container detail-grid"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Wyzwania</p><h2>Co zwykle <em>nie daje spokoju</em></h2><div class="bullet-list">{industry.challenges.map((challenge) => <div><span>↗</span><p>{challenge}</p></div>)}</div></div><div class="solution-panel"><p class="eyebrow"><span class="eyebrow-dot"></span> Możliwe kierunki</p><h2>Gdzie szukamy <em>rozwiązania</em></h2><div class="solution-list">{industry.solutions.map((solution, index) => <div><span>0{index + 1}</span><p>{solution}</p></div>)}</div><a class="button button-dark" href={withBase("/kontakt/")}>Porozmawiajmy o Twoim zakładzie <span aria-hidden="true">↗</span></a></div></div></section>
-	<section class="cta-section"><div class="container cta-box"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Następny krok</p><h2>Najlepszy projekt zaczyna się od <em>dobrych pytań.</em></h2></div><a class="button button-primary" href={withBase("/kontakt/")}>Opowiedz nam o procesie <span aria-hidden="true">↗</span></a></div></section>
+	{isProduction || isFood || isOther ? (
+		<>
+			<section class:list={['production-hero', { 'production-hero--food': isFood }]}>
+				<div class="production-hero-grid container">
+					<div class="production-hero-copy">
+						<a class="back-link" href={withBase('/branze/')}>← Wszystkie branże</a>
+						<p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> {isFood ? 'Branża spożywcza' : isOther ? 'Inne branże' : 'Branża produkcyjna'}</p>
+						<h1>{isOther ? 'Odzysk energii' : 'Odzyskaj energię'}<br /><em>{isFood ? 'z produkcji żywności' : isOther ? 'w innych branżach' : 'z produkcji'}</em></h1>
+						<p>{isFood ? 'Specyfika branży spożywczej sprawia, że największy potencjał odzysku ciepła tkwi w samych procesach technologicznych i chłodniczych.' : isOther ? 'Chociaż naszą specjalizacją jest branża produkcyjna i branża spożywcza, chętnie podejmujemy się też wyzwań z innych, rzadziej spotykanych dziedzin.' : 'W procesach produkcyjnych największy potencjał oszczędności energii tkwi w cieple odpadowym i usuwanym do otoczenia.'}</p>
+						<a class="button button-primary" href={withBase('/kontakt/')}>Porozmawiajmy o Twoim zakładzie <span aria-hidden="true">↗</span></a>
+					</div>
+					<div class="production-hero-visual">
+						<img class="industry-hero-image" src={withBase(heroImage)} alt={heroImageAlt} loading="eager" />
+						<div class="production-orbit production-orbit-one"></div><div class="production-orbit production-orbit-two"></div><span class="production-visual-label">SYSTEM / {isFood ? 'FOOD' : isOther ? 'DATA CENTER' : 'PRODUCTION'}</span>
+					</div>
+				</div>
+			</section>
+			<section class="production-potential section section-light">
+				<div class="container">
+					<div class="production-intro"><p class="eyebrow"><span class="eyebrow-dot"></span> Gdzie powstaje potencjał</p><h2>{isFood ? <>Najczęstsze możliwości<br /><em>odzysku ciepła</em><br />w zakładach spożywczych</> : isOther ? <>Przykłady nietypowych<br /><em>źródeł odzyskiwanego ciepła</em></> : <>Najczęstsze źródła <em>ciepła odpadowego</em><br />w zakładach produkcyjnych</>}</h2><p>{isFood ? 'Wiele procesów produkcyjnych w branży spożywczej wymaga chłodzenia, grzania, zamrażania czy zamiennego schładzania i podgrzewania produktów. Energię usuwaną z jednego miejsca procesu można efektywnie wykorzystać w dalszej jego części.' : isOther ? 'Istnieje wiele nietypowych źródeł użytecznego ciepła, które można wykorzystać do obniżenia kosztów funkcjonowania danego obiektu.' : 'W wielu procesach produkcyjnych energia, która nie jest wykorzystywana w produkcie, jest odprowadzana w postaci ciepła – przez spaliny, powietrze, wodę lub olej. To realny potencjał, który można ponownie wykorzystać.'}</p></div>
+					<div class="production-source-grid">{(isFood ? foodSources : isOther ? otherSources : productionSources).map((source) => <article class="production-source-card" data-production-card><div class="production-source-top"><span>{source.number}</span><span class="production-source-line"></span></div><div class="production-source-icon-wrap"><ProductionSourceIcon type={source.type} /></div><h3>{source.title}</h3><p>{source.description}</p></article>)}</div>
+				</div>
+			</section>
+			<section class="production-cta"><div class="container production-cta-box"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Porozmawiajmy</p><h2>Sprawdź, ile energii<br />może odzyskać <em>Twój zakład.</em></h2><p>Porozmawiajmy o Twoich procesach i możliwościach wykorzystania ciepła odpadowego.</p></div><a class="button button-dark" href={withBase('/kontakt/')}>Umów rozmowę <span aria-hidden="true">↗</span></a></div></section>
+			<script>
+				const sourceCards = document.querySelectorAll('[data-production-card]');
+				if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+					document.documentElement.classList.add('has-production-motion');
+					const observer = new IntersectionObserver((entries, instance) => { entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); instance.unobserve(entry.target); } }); }, { rootMargin: '0px 0px 18% 0px', threshold: 0.01 });
+					sourceCards.forEach((card, index) => { card.setAttribute('style', `--production-delay: ${index * 70}ms`); observer.observe(card); });
+				} else sourceCards.forEach((card) => card.classList.add('is-visible'));
+			</script>
+		</>
+	) : (
+		<>
+			<section class="page-hero industry-detail-hero"><div class="container page-hero-grid"><div><a class="back-link" href={withBase('/branze/')}>← Wszystkie branże</a><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> {industry.shortTitle}</p><h1>{industry.title}</h1><p>{industry.intro}</p></div><div class="detail-icon-wrap" style={`--industry-accent: ${industry.accent}`}><IndustryIcon type={industry.icon} /></div></div></section>
+			<section class="section section-light"><div class="container detail-grid"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Wyzwania</p><h2>Co zwykle <em>nie daje spokoju</em></h2><div class="bullet-list">{industry.challenges.map((challenge) => <div><span>↗</span><p>{challenge}</p></div>)}</div></div><div class="solution-panel"><p class="eyebrow"><span class="eyebrow-dot"></span> Możliwe kierunki</p><h2>Gdzie szukamy <em>rozwiązania</em></h2><div class="solution-list">{industry.solutions.map((solution, index) => <div><span>0{index + 1}</span><p>{solution}</p></div>)}</div><a class="button button-dark" href={withBase('/kontakt/')}>Porozmawiajmy o Twoim zakładzie <span aria-hidden="true">↗</span></a></div></div></section>
+			<section class="cta-section"><div class="container cta-box"><div><p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Następny krok</p><h2>Najlepszy projekt zaczyna się od <em>dobrych pytań.</em></h2></div><a class="button button-primary" href={withBase('/kontakt/')}>Opowiedz nam o procesie <span aria-hidden="true">↗</span></a></div></section>
+		</>
+	)}
 </BaseLayout>

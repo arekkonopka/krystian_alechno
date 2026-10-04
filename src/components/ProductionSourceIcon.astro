@@ -1,0 +1,24 @@
+---
+interface Props {
+	type: 'air' | 'furnace' | 'ventilation' | 'cooling' | 'energy' | 'snow' | 'water' | 'steam' | 'heat' | 'server' | 'ice' | 'water-cycle' | 'pool' | 'carwash';
+}
+
+const { type } = Astro.props;
+---
+
+<svg class="production-source-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+	{type === 'air' && <><path d="M7 17h21c4 0 4-6 0-6h-4" /><path d="M7 24h28c5 0 5-7 0-7h-4" /><path d="M7 31h18c4 0 4 6 0 6h-4" /></>}
+	{type === 'furnace' && <><path d="M10 39V16h19v23" /><path d="M29 23h9v16" /><path d="M10 16l4-6 4 6" /><path d="M18 25c3-3 3-6 0-9M24 25c3-3 3-6 0-9" /><path d="M7 39h34" /></>}
+	{type === 'ventilation' && <><circle cx="24" cy="24" r="4" /><path d="M24 20c-1-8 5-12 9-8 3 3-1 8-9 8ZM28 24c8-1 12 5 8 9-3 3-8-1-8-9ZM24 28c1 8-5 12-9 8-3-3 1-8 9-8ZM20 24c-8 1-12-5-8-9 3-3 8 1 8 9Z" /><circle cx="24" cy="24" r="15" /></>}
+	{type === 'cooling' && <><path d="M24 7v34M10 15l28 18M38 15 10 33" /><path d="m24 7-4 5m4-5 4 5m14 8-6-1m6 1-2 5M24 41l-4-5m4 5 4-5M10 33l6 1m-6-1 2-5" /></>}
+	{type === 'energy' && <><path d="m27 5-15 23h11l-2 15 15-24H25l2-14Z" /></>}
+	{type === 'snow' && <><path d="M24 6v36M8.4 15l31.2 18M39.6 15 8.4 33" /><path d="m24 6-3 5m3-5 3 5m13.6 4-6 .3m6-.3-3 5M24 42l-3-5m3 5 3-5M8.4 33l6-.3m-6 .3 3-5" /></>}
+	{type === 'water' && <><path d="M24 6S13 18 13 27a11 11 0 0 0 22 0C35 18 24 6 24 6Z" /><path d="M19 29c.8 3 2.5 4.5 5 5" /></>}
+	{type === 'steam' && <><path d="M14 38c-4-5 5-7 1-13-2-3 0-6 3-8" /><path d="M24 38c-4-6 5-8 1-15-2-4 0-8 3-11" /><path d="M34 38c-4-5 5-7 1-13-2-3 0-6 3-8" /><path d="M9 42h30" /></>}
+	{type === 'heat' && <><path d="M24 5c5 7 10 11 10 20a10 10 0 1 1-20 0c0-5 3-9 6-13" /><path d="M24 24c3 4 4 6 4 9a4 4 0 0 1-8 0c0-3 2-5 4-9Z" /></>}
+	{type === 'server' && <><rect x="11" y="7" width="26" height="34" rx="2" /><path d="M16 14h16M16 21h16M16 28h16M16 35h16" /><circle cx="20" cy="17" r="1" /><circle cx="20" cy="24" r="1" /><circle cx="20" cy="31" r="1" /></>}
+	{type === 'ice' && <><path d="M12 34h24M17 34l-2-13 5 3 4-7 4 7 5-3-2 13" /><path d="M24 17V8M20 12l4-4 4 4" /></>}
+	{type === 'water-cycle' && <><path d="M24 7S14 18 14 26a10 10 0 0 0 20 0C34 18 24 7 24 7Z" /><path d="M10 18a17 17 0 0 1 25-4M38 30a17 17 0 0 1-25 4" /><path d="m33 10 2 4-5 1M15 38l-2-4 5-1" /></>}
+	{type === 'pool' && <><path d="M8 16h32M8 16l3-5h26l3 5" /><path d="M12 25c3-4 6 4 9 0s6 4 9 0 6 4 9 0" /><path d="M12 32c3-4 6 4 9 0s6 4 9 0 6 4 9 0" /></>}
+	{type === 'carwash' && <><path d="M9 31v-7l4-8h22l4 8v7" /><path d="M13 31h22M16 16l2-5h12l2 5M15 24h4M29 24h4" /><path d="M10 35v4M38 35v4M8 20l-3-3M40 20l3-3" /><circle cx="18" cy="31" r="2" /><circle cx="30" cy="31" r="2" /></>}
+</svg>
